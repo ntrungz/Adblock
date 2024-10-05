@@ -1,2 +1,5 @@
 # connect.facebook.net
 api-js.datadome.co
+
+googleadservices.com
+www.googleadservices.com
