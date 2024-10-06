@@ -3,3 +3,4 @@ api-js.datadome.co
 
 googleadservices.com
 www.googleadservices.com
+doubleclick.net
