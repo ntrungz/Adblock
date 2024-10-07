@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  run_on_ubuntu_20_04:
-    name: Cloudflare Gateway on Ubuntu 20.04
+  me:
+    name: ntrung1608
     permissions: write-all
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -40,8 +40,8 @@ jobs:
           retain_days: 0
           keep_minimum_runs: 1
 
-  run_on_ubuntu_22_04:
-    name: Cloudflare Gateway on Ubuntu 22.04
+  all:
+    name: nhattrung1608
     permissions: write-all
     runs-on: ubuntu-latest
     timeout-minutes: 15
