@@ -1,10 +1,47 @@
 name: Add Rules to Cloudflare Gateway
+
 on:
   push:
   workflow_dispatch:
+
 jobs:
-  run:
-    name: Cloudflare Gateway
+  run_on_ubuntu_20_04:
+    name: Cloudflare Gateway on Ubuntu 20.04
+    permissions: write-all
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN_1 }}
+      CF_IDENTIFIER: ${{ secrets.CF_IDENTIFIER_1 }}
+      ADLIST_URLS: ${{ vars.ADLIST_URLS }}
+      WHITELIST_URLS: ${{ vars.WHITELIST_URLS }}
+      DYNAMIC_BLACKLIST: ${{ vars.DYNAMIC_BLACKLIST }}
+      DYNAMIC_WHITELIST: ${{ vars.DYNAMIC_WHITELIST_1 }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+          
+      - name: Install Python
+        uses: actions/setup-python@main
+        with:
+          python-version: 3.11
+        
+      - name: Cloudflare Gateway Zero Trust 
+        run: python -m src run
+          
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 0
+          keep_minimum_runs: 1
+
+  run_on_ubuntu_22_04:
+    name: Cloudflare Gateway on Ubuntu 22.04
     permissions: write-all
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -38,5 +75,5 @@ jobs:
           retain_days: 0
           keep_minimum_runs: 1
 
-      # - name: Delete all lists and rules
+      # - name: Cloudflare Gateway Zero Trust 
       #   run: python -m src leave
